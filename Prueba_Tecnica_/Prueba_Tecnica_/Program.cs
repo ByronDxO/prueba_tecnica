@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 // boton para poder comprobar la autorizacion de token a través del swager 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "software lio", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Token JWT", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
