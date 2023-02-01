@@ -206,3 +206,39 @@ con este enpoint que es un Post podremos logearnos con el token, por lo que se n
 ### Rendimiento y Escalabilidad 
 
 #### esta manera de tokens es muy usado actualmente, el rendimiento es bueno , pero si nos queremos proteger de situaciones donde su principal forma de saturar nuestra capacidad de procesamiento seria colocando un [Authorize] encima de cada endpoint que se quiera proteger y no sea abierto a todo el publico, de esta manera nos podemos proteger en cierta medida en contra de este tipo de acciones y mejoraremos nuestro rendimiento , la escalabilidad es bastante buena llegado al punto que la mayoria de proyectos que hay actualmente utiliza este protocolo de generaciónd e token en JWT debido a su alto indice de fiabilidad y su rapida implementación en cualquier endpoint u eveneto que pueda realizar un usuario.
+
+### Consultas SQL 
+
+```sql
+/* Consulta de mas vendido */
+SELECT articulo.nombreArt, SUM(detalle_venta.cantidad) as cantidad
+    FROM detalle_venta JOIN articulo ON detalle_venta.id_articulo = articulo.idArticulo
+    GROUP BY articulo.idArticulo
+    ORDER BY SUM(detalle_venta.cantidad) DESC LIMIT 1;
+
+	/* Consulta más Facturado */ 
+SELECT SUM(v.total) AS Total,
+		MONTHNAME(v.fecha) AS Mes
+FROM venta v 
+GROUP BY Mes;
+
+
+insert into productos(nombre,cantidad)
+values('prod2',10)
+	/* Categoría con más Productos  */ 
+select top 1 nombre,cantidad from productos
+order by cantidad desc 
+
+
+
+
+	/* Utilizando tablas de referencia cruzada mostrar el producto y día de la semana en
+que más se vende */ 
+
+select p.nombre , d.dia from detalle p
+inner join dia_semana d
+on p.id_dia = d.id_dia
+order by total desc 
+
+```
+
